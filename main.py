@@ -8,5 +8,5 @@ pid = os.fork()
 while True:
     conn, addr = s.accept()
     data = conn.recv(1024)
-    if not data:
-        conn.send(data)
+    conn.send(data)
+conn.close()
