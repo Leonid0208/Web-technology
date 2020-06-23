@@ -7,9 +7,10 @@ s.listen(10)
 while True:
     conn, addr = s.accept()
     pid = os.fork()
-    if pid == 0 and not data:
+    if pid == 0:
         data = conn.recv(1024)
-        conn.send(data)
+        if not data:
+            conn.send(data)
         conn.close()
     else:
         conn.close()
