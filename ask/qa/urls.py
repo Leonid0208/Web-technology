@@ -11,5 +11,4 @@ urlpatterns = {
     url(r'^popular/$', views.test),
     url(r'^new/$', views.test),
     url(r'^question/(?P<pk>\d+)/$', views.test),
-    url(r'^', views.not_found)
 }
