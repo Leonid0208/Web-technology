@@ -1,5 +1,5 @@
   
-def app(environ, start_response):
+def application(environ, start_response):
     # for i in environ['QUERY_STRING']:
     if environ['QUERY_STRING']:
         s = str(environ['QUERY_STRING']).split('&')
