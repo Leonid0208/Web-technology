@@ -1,3 +1,5 @@
+virtualenv -p python3 myvenv
+source myvenv/bin/activate
 sudo apt update
 sudo apt install python3.5
 sudo apt-get install -y python3.5-dev
