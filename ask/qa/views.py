@@ -10,7 +10,7 @@ def question(request):
     paginator = Paginator(posts, 10)
     paginator.baseurl = '/?page='
     page = paginator.page(page)
-    return render(request, 'list.html',
+    return render(request, 'qa/qa.html',
                   {'title': 'Latest',
                    'paginator': paginator,
                    'questions': page.object_list,
@@ -25,7 +25,7 @@ def question_famous(request):
     paginator = Paginator(posts, 10)
     paginator.baseurl = '/popular/?page='
     page = paginator.page(page)
-    return render(request, 'list.html',
+    return render(request, 'qa/qa.html',
                   {'title': 'Latest',
                    'paginator': paginator,
                    'questions': page.object_list,
