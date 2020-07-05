@@ -34,3 +34,12 @@ def question_famous(request):
                    'session': request.session, })
 
 
+def found(request):
+    return HttpResponse("Found!")
+
+
+def not_found(request):
+    return HttpResponseNotFound("Not Found!")
+
+
+
