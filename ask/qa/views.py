@@ -1,37 +1,54 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, Http404, HttpResponseNotFound
 from django.core.paginator import Paginator
-from .models import Question
+
+from .models import Question, Answer
 
 
-def question(request):
-    posts = Question.objects.all().order_by('-id')
-    page = request.GET.get('page')
-    paginator = Paginator(posts, 10)
-    paginator.baseurl = '/?page='
+# Create your views here.
+
+def question(request, num,):
+    try:
+        q = Question.objects.get(id=num)
+    except Question.DoesNotExist:
+        raise Http404
+    return render(request, 'qa/qa.html', {'question': q, })
+
+
+def index(request):
+    try:
+        page = int(request.GET.get("page"))
+    except ValueError:
+        page = 1
+    except TypeError:
+        page = 1
+    questions = Question.objects.all().order_by('-id')
+    paginator = Paginator(questions, 10)
     page = paginator.page(page)
-    return render(request, 'qa/qa.html',
+
+    return render(request, 'qa/list.html',
                   {'title': 'Latest',
                    'paginator': paginator,
                    'questions': page.object_list,
-                   'page': page,
-                   'user': request.user,
-                   'session': request.session, })
+                   'page': page, })
 
 
-def question_famous(request):
-    posts = Question.objects.all().order_by('-rating')
-    page = request.GET.get('page')
-    paginator = Paginator(posts, 10)
-    paginator.baseurl = '/popular/?page='
+def popular(request):
+    try:
+        page = int(request.GET.get("page"))
+    except ValueError:
+        page = 1
+    except TypeError:
+        page = 1
+    questions = Question.objects.all().order_by('-rating')
+    paginator = Paginator(questions, 10)
     page = paginator.page(page)
-    return render(request, 'qa/qa.html',
-                  {'title': 'Latest',
+
+    return render(request, 'qa/list.html',
+                  {'title': 'Popular',
                    'paginator': paginator,
                    'questions': page.object_list,
-                   'page': page,
-                   'user': request.user,
-                   'session': request.session, })
+                   'page': page, })
 
 
 def test(request, *args, **kwargs):

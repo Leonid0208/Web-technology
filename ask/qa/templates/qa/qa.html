@@ -2,20 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{{ question }}</title>
 </head>
 <body>
-    <nav><ul class="pagination">
-    {% for p in paginator.page_range %}
-     {% if p.number == page.number %}
-     <li class="active">
-     {% else %}
-     <li>
-     {% endif %}
-      <a href="{{ paginator.baseurl }}{{ p }}">
-  {{ p }}</a>
-    </li>
+    <h1>{{ question }}</h1>
+    <div>{{ question.text }}</div>
+    <ul>
+    {% for answer in question.answer_set.all %}
+        <li>{{ answer }}</li>
     {% endfor %}
-    </ul></nav>
+    </ul>
 </body>
 </html>

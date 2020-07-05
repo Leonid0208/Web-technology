@@ -8,7 +8,7 @@ urlpatterns = {
     url(r'^login/$', views.test),
     url(r'^signup/$', views.test),
     url(r'^ask/$', views.test),
-    url(r'^popular/(?P<num>\d+)//$', views.question_famous),
+    url(r'^popular/(?P<num>\d+)//$', views.popular),
     url(r'^new/$', views.test),
     url(r'^question/(?P<num>\d+)/$', views.question),
 }
