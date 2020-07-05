@@ -34,12 +34,12 @@ def question_famous(request):
                    'session': request.session, })
 
 
-def found(request):
-    return HttpResponse("Found!")
+def test(request, *args, **kwargs):
+    return HttpResponse('OK')
 
 
 def not_found(request):
-    return HttpResponseNotFound("Not Found!")
+    return HttpResponseNotFound('Not found!')
 
 
 
