@@ -1,6 +1,6 @@
 from django import forms
 
-from ask.qa.models import Question, Answer
+from .models import Question, Answer
 
 
 class AskForm(forms.Form):
