@@ -13,13 +13,13 @@ def question(request, num,):
     except Question.DoesNotExist:
         raise Http404
     if request.method == 'POST':
-        form = AskForm(request.POST)
+        form = AnswerForm(request.POST)
         if form.is_valid():
             post = form.save()
             url = post.get_url()
             return HttpResponseRedirect(url)
     else:
-        form = AnswerForm()
+        form = AnswerForm(initial={'question': q.id})
     return render(request, 'qa/qa.html', {'question': q, 'form': form, 'user': request.user, })
 
 
