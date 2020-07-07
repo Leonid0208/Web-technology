@@ -25,13 +25,14 @@ class Question(models.Model):
         return self.title
 
     def get_url(self):
-        return 'question/{}/'.format(self.id)
+        return '/question/{}/'.format(self.id)
+
 
 class Answer(models.Model):
     text = models.TextField(default="")
     added_at = models.DateField(null=True)
-    question = models.ForeignKey(Question, null=True, 
-on_delete=models.SET_NULL)
+    question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
     author = models.ForeignKey(User)
+
     def __str__(self):
         return self.text
