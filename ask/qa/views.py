@@ -5,23 +5,25 @@ from .forms import AskForm, AnswerForm
 from .models import Question, Answer
 
 
-# Create your views here.
-
 def question(request, num,):
     try:
         q = Question.objects.get(id=num)
     except Question.DoesNotExist:
         raise Http404
-    if request.method == 'POST':
+    if request.method == "POST":
         form = AnswerForm(request.POST)
         if form.is_valid():
             form._user = request.user
-            form.save()
+            _ = form.save()
             url = q.get_url()
             return HttpResponseRedirect(url)
     else:
         form = AnswerForm(initial={'question': q.id})
-    return render(request, 'qa/qa.html', {'question': q, 'form': form, 'user': request.user, })
+
+    return render(request, 'qa/qa.html', {'question': q,
+                                             'form': form,
+                                             'user': request.user,
+                                             'session': request.session, })
 
 
 def ask(request):
@@ -34,8 +36,9 @@ def ask(request):
             return HttpResponseRedirect(url)
     else:
         form = AskForm()
-    return render(request, 'ask.html', {'form': form,
-                                        'user': request.user, })
+    return render(request, 'qa/ask.html', {'form': form,
+                                        'user': request.user,
+                                        'session': request.session, })
 
 
 def index(request):
