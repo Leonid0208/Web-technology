@@ -32,7 +32,7 @@ def ask(request):
             return HttpResponseRedirect(url)
     else:
         form = AskForm()
-    return render(request, 'qa/ask.html', {'question': q, 'form': form, 'user': request.user, })
+    return render(request, 'qa/ask.html', {'form': form, 'user': request.user, })
 
 
 def index(request):
